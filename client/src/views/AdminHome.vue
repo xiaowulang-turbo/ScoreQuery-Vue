@@ -16,6 +16,7 @@
       </el-col>
     </el-row>
   </el-card>
+  <div><router-view /></div>
 </template>
 
 <script>

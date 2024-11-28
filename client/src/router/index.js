@@ -17,6 +17,10 @@ const routes = [
       { path: 'users', component: AdminUsers },
     ],
   },
+  {
+    path: '/:catchAll(.*)', // 匹配所有未定义的路由
+    component: () => import('../views/NotFound.vue'), // 导入 404 页面组件
+  },
 ]
 
 const router = createRouter({
