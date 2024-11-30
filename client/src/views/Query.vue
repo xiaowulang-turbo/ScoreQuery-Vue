@@ -3,20 +3,61 @@
     <h2>成绩查询</h2>
     <el-form :model="queryForm" label-width="100px" class="query-form">
       <el-form-item label="考生号">
-        <el-input v-model="queryForm.exam_id" placeholder="请输入考生号" />
+        <el-input v-model="queryForm.userId" placeholder="请输入考生号" />
       </el-form-item>
       <el-button type="primary" @click="onQuery">查询成绩</el-button>
     </el-form>
     <el-divider></el-divider>
-    <el-table v-if="grade" :data="[grade]" style="width: 100%">
-      <el-table-column prop="exam_id" label="考生号" />
-      <el-table-column prop="name" label="姓名" />
-      <el-table-column prop="level" label="考试级别" />
+    <!-- <el-table
+      v-if="score.value.userId"
+      :data="[flatTableData]"
+      style="width: 100%"
+    >
+      <el-table-column prop="userId" label="考生号" style="width: 10%" />
+      <el-table-column prop="name" label="姓名" style="width: 10%" />
+      <el-table-column label="Scores">
+        <template #default="{ row }">
+          <el-table :data="row.scores" border>
+            <el-table-column prop="level" label="考试级别" />
+            <el-table-column prop="examDate" label="考试时间" />
+            <el-table-column prop="score" label="分数" />
+            <el-table-column prop="details.listening" label="听力" />
+            <el-table-column prop="details.reading" label="阅读" />
+            <el-table-column prop="details.writing" label="写作" />
+            <el-table-column label="是否通过" v-slot="{ row }">
+              <el-tag :type="row.score >= 60 ? 'success' : 'danger'">
+                {{ row.score >= 60 ? '通过' : '未通过' }}
+              </el-tag>
+            </el-table-column>
+          </el-table>
+        </template>
+      </el-table-column> -->
+
+    <!-- <el-table-column prop="level" label="考试级别" />
       <el-table-column prop="examDate" label="考试时间" />
       <el-table-column prop="score" label="分数" />
       <el-table-column label="是否通过" v-slot="{ row }">
         <el-tag :type="row.score >= 60 ? 'success' : 'danger'">
           {{ row.score >= 60 ? '通过' : '未通过' }}
+        </el-tag>
+      </el-table-column> -->
+    <!-- </el-table> -->
+    <el-table
+      v-if="flatTableData.length"
+      :data="flatTableData"
+      style="width: 100%"
+    >
+      <el-table-column prop="userId" label="考生号" />
+      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="level" label="考试级别" />
+      <el-table-column prop="examDate" label="考试时间" />
+      <el-table-column prop="totalScore" label="总分" />
+      <el-table-column prop="listening" label="Listening" />
+      <el-table-column prop="reading" label="Reading" />
+      <el-table-column prop="writing" label="Writing" />
+      <el-table-column label="是否通过" v-slot="{ row }">
+        <el-tag :type="row.totalScore >= 60 ? 'success' : 'danger'">
+          {{ row.totalScore >= 60 ? '通过' : '未通过' }}
         </el-tag>
       </el-table-column>
     </el-table>
@@ -25,39 +66,64 @@
 
 <script>
 import { reactive } from 'vue'
-// import { queryGrade } from '../api/grades'
+import { getScore } from '../api/scores'
 
 export default {
+  computed: {
+    flatTableData() {
+      if (!this.score?.value) return []
+      const { userId, name, scores } = this.score.value
+      if (!scores) return []
+      return scores.map(score => ({
+        userId,
+        name,
+        level: score.level,
+        examDate: score.examDate,
+        totalScore: score.score,
+        listening: score.details.listening,
+        reading: score.details.reading,
+        writing: score.details.writing,
+      }))
+    },
+  },
   setup() {
     const queryForm = reactive({
-      exam_id: '',
+      userId: '',
     })
-    const grade = reactive(null)
+    const score = reactive({
+      value: {},
+    })
 
     const onQuery = async () => {
       try {
-        const { data } = await queryGrade(queryForm.exam_id)
-        grade.value = data
+        const { data } = await getScore(queryForm.userId)
+        if (!data) {
+          score.value = null
+          return
+        }
+        console.log(data)
+        score.value = data
       } catch (error) {
-        grade.value = null
+        score.value = null
         console.error('查询失败:', error)
       }
     }
 
-    return { queryForm, grade, onQuery }
+    return { queryForm, score, onQuery }
   },
 }
 </script>
 
 <style>
 .query-card {
-  width: 600px;
+  /* width: 600px; */
   margin: 50px auto;
   padding: 20px;
 }
 .query-form {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  /* align-items: center; */
 }
 </style>
