@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 const Router = require('koa-router')
 require('dotenv').config() // 加载 .env 文件中的环境变量
 
-// const authRoutes = require('./routes/auth')
-const scoreRoutes = require('./routes/scores')
+const authsRoutes = require('./routes/auths')
+const scoresRoutes = require('./routes/scores')
 const usersRoutes = require('./routes/users')
 
 const app = new Koa()
@@ -29,8 +29,8 @@ mongoose
   .catch(err => console.error('数据库连接失败:', err))
 
 // 路由配置
-// router.use('/auth', authRoutes.routes())
-router.use('/scores', scoreRoutes.routes())
+router.use('/auths', authsRoutes.routes())
+router.use('/scores', scoresRoutes.routes())
 router.use('/users', usersRoutes.routes())
 app.use(router.routes()).use(router.allowedMethods())
 
