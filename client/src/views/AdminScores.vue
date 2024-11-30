@@ -1,8 +1,10 @@
 <template>
   <el-card>
-    <h2>成绩管理</h2>
-    <el-button type="primary" @click="showAddModal">添加成绩</el-button>
-    <el-table :data="scores" style="width: 100%">
+    <div class="card-header">
+      <h2>成绩管理</h2>
+      <el-button type="primary" @click="showAddModal">添加成绩</el-button>
+    </div>
+    <el-table :data="scores" border style="width: 100%">
       <el-table-column prop="userId" label="考生号" />
       <el-table-column prop="name" label="姓名" />
       <el-table-column prop="score" label="分数" />
@@ -14,7 +16,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog :visible.sync="isModalVisible" title="添加/编辑成绩">
+    <el-dialog v-model="isModalVisible" title="添加/编辑成绩">
       <el-form :model="currentScore" ref="scoreForm">
         <el-form-item label="考生号" prop="userId">
           <el-input v-model="currentScore.userId" />
@@ -85,3 +87,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+</style>
