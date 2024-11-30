@@ -2,8 +2,8 @@
   <el-card class="login-card">
     <h2>四六级查分系统</h2>
     <el-form :model="form" :rules="rules" ref="loginForm">
-      <el-form-item label="考生号" prop="exam_id">
-        <el-input v-model="form.exam_id" />
+      <el-form-item label="考生号" prop="userId">
+        <el-input v-model="form.userId" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input type="password" v-model="form.password" />
@@ -15,7 +15,7 @@
 
 <script>
 import { reactive, ref } from 'vue'
-// import { login } from '../api/auth'
+import { login } from '../api/auths'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -23,20 +23,26 @@ export default {
   setup() {
     const router = useRouter()
     const store = useStore()
-    const form = reactive({ exam_id: '', password: '' })
+    const form = reactive({ userId: '', password: '' })
     const loginForm = ref(null)
     const rules = {
-      exam_id: [{ required: true, message: '请输入考生号', trigger: 'blur' }],
+      userId: [{ required: true, message: '请输入考生号', trigger: 'blur' }],
       password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
     }
 
     const onSubmit = async () => {
       try {
-        const { data } = await login(form.exam_id, form.password)
-        store.commit('setUser', data.user)
-        store.commit('setToken', data.token)
+        await loginForm.value.validate()
+        console.log(form, form.userId, form.password)
+        const { data } = await login({
+          userId: form.userId,
+          password: form.password,
+        })
+        store.commit('setUser', data.role)
+        // store.commit('setToken', data.token)
+        console.log(store.state)
 
-        if (data.user.role === 'admin') router.push('/admin/grades')
+        if (data.role === 'admin') router.push('/admin/scores')
         else router.push('/query')
       } catch (error) {
         console.error('登录失败:', error)
