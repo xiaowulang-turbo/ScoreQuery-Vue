@@ -36,6 +36,7 @@
 <script>
 import { reactive, ref } from 'vue'
 import { getScores, addScore, updateScore, deleteScore } from '../api/scores'
+import { ElMessage } from 'element-plus'
 
 export default {
   setup() {
@@ -44,8 +45,15 @@ export default {
     const currentScore = reactive({})
 
     const fetchScores = async () => {
-      const { data } = await getScores()
-      scores.value = data
+      try {
+        const { data } = await getScores()
+        if (!data) return
+        scores.value = data
+        ElMessage.success('获取成绩成功')
+      } catch (error) {
+        console.error(error)
+        ElMessage.error('获取成绩失败')
+      }
     }
 
     const showAddModal = () => {

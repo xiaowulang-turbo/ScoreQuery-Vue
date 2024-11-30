@@ -127,7 +127,12 @@ export default {
       this.loading = true
       try {
         const response = await getUsers()
+        if (!response.data) {
+          ElMessage.error('无法获取用户列表，请稍后再试')
+          return
+        }
         this.users = response.data
+        ElMessage.success('用户列表获取成功')
       } catch (error) {
         ElMessage.error('无法获取用户列表，请稍后再试')
       } finally {
