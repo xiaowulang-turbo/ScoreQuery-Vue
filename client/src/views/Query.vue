@@ -8,40 +8,6 @@
       <el-button type="primary" @click="onQuery">查询成绩</el-button>
     </el-form>
     <el-divider></el-divider>
-    <!-- <el-table
-      v-if="score.value.userId"
-      :data="[flatTableData]"
-      style="width: 100%"
-    >
-      <el-table-column prop="userId" label="考生号" style="width: 10%" />
-      <el-table-column prop="name" label="姓名" style="width: 10%" />
-      <el-table-column label="Scores">
-        <template #default="{ row }">
-          <el-table :data="row.scores" border>
-            <el-table-column prop="level" label="考试级别" />
-            <el-table-column prop="examDate" label="考试时间" />
-            <el-table-column prop="score" label="分数" />
-            <el-table-column prop="details.listening" label="听力" />
-            <el-table-column prop="details.reading" label="阅读" />
-            <el-table-column prop="details.writing" label="写作" />
-            <el-table-column label="是否通过" v-slot="{ row }">
-              <el-tag :type="row.score >= 60 ? 'success' : 'danger'">
-                {{ row.score >= 60 ? '通过' : '未通过' }}
-              </el-tag>
-            </el-table-column>
-          </el-table>
-        </template>
-      </el-table-column> -->
-
-    <!-- <el-table-column prop="level" label="考试级别" />
-      <el-table-column prop="examDate" label="考试时间" />
-      <el-table-column prop="score" label="分数" />
-      <el-table-column label="是否通过" v-slot="{ row }">
-        <el-tag :type="row.score >= 60 ? 'success' : 'danger'">
-          {{ row.score >= 60 ? '通过' : '未通过' }}
-        </el-tag>
-      </el-table-column> -->
-    <!-- </el-table> -->
     <el-table
       v-if="flatTableData.length"
       :data="flatTableData"
@@ -56,7 +22,7 @@
       <el-table-column prop="reading" label="Reading" />
       <el-table-column prop="writing" label="Writing" />
       <el-table-column label="是否通过" v-slot="{ row }">
-        <el-tag :type="row.totalScore >= 60 ? 'success' : 'danger'">
+        <el-tag :type="row.totalScore >= 426 ? 'success' : 'danger'">
           {{ row.totalScore >= 60 ? '通过' : '未通过' }}
         </el-tag>
       </el-table-column>
@@ -67,6 +33,7 @@
 <script>
 import { reactive } from 'vue'
 import { getScore } from '../api/scores'
+import dayjs from 'dayjs'
 
 export default {
   computed: {
@@ -78,7 +45,7 @@ export default {
         userId,
         name,
         level: score.level,
-        examDate: score.examDate,
+        examDate: dayjs(score.examDate).format('YYYY-MM-DD'),
         totalScore: score.score,
         listening: score.details.listening,
         reading: score.details.reading,
