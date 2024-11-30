@@ -11,7 +11,7 @@
       <el-col :span="12">
         <el-card>
           <h3>成绩管理</h3>
-          <el-button type="primary" @click="goToGrades">管理成绩</el-button>
+          <el-button type="primary" @click="goToScores">管理成绩</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -28,10 +28,10 @@ export default {
     const goToUsers = () => {
       router.push('/admin/users')
     }
-    const goToGrades = () => {
-      router.push('/admin/grades')
+    const goToScores = () => {
+      router.push('/admin/scores')
     }
-    return { goToUsers, goToGrades }
+    return { goToUsers, goToScores }
   },
 }
 </script>

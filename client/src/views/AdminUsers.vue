@@ -7,7 +7,7 @@
       </div>
       <el-table :data="users" border style="width: 100%" v-loading="loading">
         <el-table-column prop="name" label="姓名" width="150" />
-        <el-table-column prop="exam_id" label="考生号" width="150" />
+        <el-table-column prop="userId" label="考生号" width="150" />
         <el-table-column prop="role" label="身份" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.role === 'admin' ? 'success' : 'info'">
@@ -52,8 +52,8 @@
         <el-form-item label="姓名" prop="name">
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item label="考生号" prop="exam_id">
-          <el-input v-model="form.exam_id" :disabled="editingUser !== null" />
+        <el-form-item label="考生号" prop="userId">
+          <el-input v-model="form.userId" :disabled="editingUser !== null" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" type="password" />
@@ -101,7 +101,7 @@ export default {
       editingUser: null,
       form: {
         name: '',
-        exam_id: '',
+        userId: '',
         password: '',
         gender: '',
         role: 'student',
@@ -109,7 +109,7 @@ export default {
       },
       rules: {
         name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        exam_id: [{ required: true, message: '请输入考生号', trigger: 'blur' }],
+        userId: [{ required: true, message: '请输入考生号', trigger: 'blur' }],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, message: '密码不能少于6个字符', trigger: 'blur' },
@@ -139,7 +139,7 @@ export default {
       this.isModalVisible = true
       this.form = {
         name: '',
-        exam_id: '',
+        userId: '',
         password: '',
         gender: '',
         role: 'student',

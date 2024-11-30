@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Query from '../views/Query.vue'
 import AdminHome from '../views/AdminHome.vue'
-import AdminGrades from '../views/AdminGrades.vue'
+import AdminScores from '../views/AdminScores.vue'
 import AdminUsers from '../views/AdminUsers.vue'
 
 const routes = [
@@ -13,7 +13,7 @@ const routes = [
     path: '/admin',
     component: AdminHome,
     children: [
-      { path: 'grades', component: AdminGrades },
+      { path: 'scores', component: AdminScores },
       { path: 'users', component: AdminUsers },
     ],
   },
