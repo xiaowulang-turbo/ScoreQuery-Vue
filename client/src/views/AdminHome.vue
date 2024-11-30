@@ -1,22 +1,20 @@
 <template>
-  <el-card class="admin-home">
-    <h2>管理员首页</h2>
-    <el-row :gutter="20">
-      <el-col :span="12">
-        <el-card>
-          <h3>用户管理</h3>
-          <el-button type="primary" @click="goToUsers">管理用户</el-button>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card>
-          <h3>成绩管理</h3>
-          <el-button type="primary" @click="goToScores">管理成绩</el-button>
-        </el-card>
-      </el-col>
-    </el-row>
-  </el-card>
-  <div><router-view /></div>
+  <div class="common-layout">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-container>
+        <el-aside width="200px">
+          <el-menu>
+            <el-menu-item @click="goToUsers">Users</el-menu-item>
+            <el-menu-item @click="goToScores">Scores</el-menu-item>
+          </el-menu>
+        </el-aside>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -37,8 +35,24 @@ export default {
 </script>
 
 <style>
-.admin-home {
-  width: 800px;
-  margin: 50px auto;
+.el-header {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-aside {
+  background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
 }
 </style>
