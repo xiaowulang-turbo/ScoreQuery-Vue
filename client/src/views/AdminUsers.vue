@@ -45,7 +45,7 @@
     <!-- 编辑/添加用户模态框 -->
     <el-dialog
       :title="editingUser ? '编辑用户' : '添加用户'"
-      :visible.sync="isModalVisible"
+      v-model="isModalVisible"
       width="500px"
     >
       <el-form :model="form" :rules="rules" ref="formRef">
