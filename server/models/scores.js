@@ -7,7 +7,7 @@ const scoreSchema = new Schema({
   userId: { type: String, required: true },
   scores: [
     {
-      type: { type: String, enum: ['CET4', 'CET6'], required: true },
+      level: { type: String, enum: ['CET4', 'CET6'], required: true },
       score: { type: Number, required: true },
       examDate: { type: Date, required: true },
       details: {

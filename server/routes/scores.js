@@ -16,11 +16,11 @@ router.get('/', async ctx => {
 })
 
 // 根据考生号查询成绩
-router.get('/:exam_id', async ctx => {
-  const { exam_id } = ctx.params
+router.get('/:userId', async ctx => {
+  const { userId } = ctx.params
 
   try {
-    const score = await Score.findOne({ exam_id })
+    const score = await Score.findOne({ userId })
     if (!score) {
       ctx.status = 404
       ctx.body = { message: '未找到对应成绩' }
@@ -36,18 +36,18 @@ router.get('/:exam_id', async ctx => {
 
 // 新增成绩
 router.post('/', async ctx => {
-  const { exam_id, examDate, level, score, isPass } = ctx.request.body
+  const { userId, examDate, level, score, isPass } = ctx.request.body
 
   try {
     // 检查是否已存在成绩
-    const existingScore = await Score.findOne({ exam_id, examDate, level })
+    const existingScore = await Score.findOne({ userId, examDate, level })
     if (existingScore) {
       ctx.status = 400
       ctx.body = { message: '成绩记录已存在' }
       return
     }
 
-    const score = new Score({ exam_id, examDate, level, score, isPass })
+    const score = new Score({ userId, examDate, level, score, isPass })
     const savedScore = await score.save()
 
     ctx.status = 201

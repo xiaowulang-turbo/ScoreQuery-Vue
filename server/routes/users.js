@@ -17,18 +17,18 @@ router.get('/', async ctx => {
 
 // 新增用户
 router.post('/', async ctx => {
-  const { name, exam_id, password, gender, role, birthDate } = ctx.request.body
+  const { name, userId, password, gender, role, birthDate } = ctx.request.body
 
   try {
     // 检查用户是否存在
-    const existingUser = await Score.findOne({ exam_id })
+    const existingUser = await Score.findOne({ userId })
     if (existingUser) {
       ctx.status = 400
       ctx.body = { message: '该考生号已存在' }
       return
     }
 
-    const user = new Score({ name, exam_id, password, gender, role, birthDate })
+    const user = new Score({ name, userId, password, gender, role, birthDate })
     const newUser = await user.save()
 
     ctx.status = 201
