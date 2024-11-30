@@ -1,0 +1,70 @@
+[
+  {
+    "name": "John Doe",
+    "userId": "user123",
+    "scores": [
+      {
+        "level": "CET4",
+        "score": 425,
+        "examDate": "2022-01-01",
+        "details": {
+          "listening": 180,
+          "reading": 180,
+          "writing": 65
+        }
+      },
+      {
+        "level": "CET6",
+        "score": 525,
+        "examDate": "2022-02-01",
+        "details": {
+          "listening": 200,
+          "reading": 200,
+          "writing": 75
+        }
+      },
+      {
+        "level": "IELTS",
+        "score": 7.0,
+        "examDate": "2022-03-01",
+        "details": {
+          "listening": 7.5,
+          "reading": 7.5,
+          "writing": 6.5
+        }
+      }
+    ]
+  },
+  {
+    "name": "Jane Smith",
+    "userId": "user456",
+    "scores": [
+      {
+        "level": "CET6",
+        "score": 525,
+        "examDate": "2022-02-01",
+        "details": {
+          "listening": 200,
+          "reading": 200,
+          "writing": 75
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tom Johnson",
+    "userId": "user789",
+    "scores": [
+      {
+        "level": "IELTS",
+        "score": 7.5,
+        "examDate": "2022-03-01",
+        "details": {
+          "listening": 8.5,
+          "reading": 8.0,
+          "writing": 7.0
+        }
+      }
+    ]
+  }
+]
