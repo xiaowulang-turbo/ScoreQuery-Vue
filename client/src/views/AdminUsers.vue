@@ -5,23 +5,23 @@
         <h2>用户管理</h2>
         <el-button type="primary" @click="openAddUserModal">添加用户</el-button>
       </div>
-      <el-table :data="users" border style="width: 100%" v-loading="loading">
-        <el-table-column prop="name" label="姓名" width="150" />
-        <el-table-column prop="userId" label="考生号" width="150" />
-        <el-table-column prop="role" label="身份" width="100">
+      <el-table :data="users" border v-loading="loading">
+        <el-table-column prop="name" label="姓名" />
+        <el-table-column prop="userId" label="考生号" />
+        <el-table-column prop="role" label="身份">
           <template #default="scope">
             <el-tag :type="scope.row.role === 'admin' ? 'success' : 'info'">
               {{ scope.row.role === 'admin' ? '管理员' : '学生' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="gender" label="性别" width="100" />
-        <el-table-column prop="birthDate" label="出生日期" width="180">
+        <el-table-column prop="gender" label="性别" />
+        <el-table-column prop="birthDate" label="出生日期">
           <template #default="scope">
             {{ formatDate(scope.row.birthDate) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180">
+        <el-table-column label="操作">
           <template #default="scope">
             <el-button
               size="small"
