@@ -13,5 +13,20 @@
     "userId": "user789",
     "password": "pass789",
     "role": "guest"
+  },
+  {
+    "userId": "admin1",
+    "password": "admin1",
+    "role": "admin"
+  },
+  {
+    "userId": "admin2",
+    "password": "admin2",
+    "role": "admin"
+  },
+  {
+    "userId": "user1",
+    "password": "user1",
+    "role": "user"
   }
 ]

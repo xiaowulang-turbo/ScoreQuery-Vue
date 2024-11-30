@@ -24,13 +24,13 @@
         }
       },
       {
-        "level": "IELTS",
-        "score": 7.0,
+        "level": "CET4",
+        "score": 466,
         "examDate": "2022-03-01",
         "details": {
-          "listening": 7.5,
-          "reading": 7.5,
-          "writing": 6.5
+          "listening": 190,
+          "reading": 190,
+          "writing": 76
         }
       }
     ]
