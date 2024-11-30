@@ -38,11 +38,10 @@ export default {
           userId: form.userId,
           password: form.password,
         })
-        store.commit('setUser', data.role)
+        store.commit('setUser', data[0].role)
         // store.commit('setToken', data.token)
-        console.log(store.state)
 
-        if (data.role === 'admin') router.push('/admin/scores')
+        if (data[0].role === 'admin') router.push('/admin/scores')
         else router.push('/query')
       } catch (error) {
         console.error('登录失败:', error)
