@@ -1,12 +1,12 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>四六级查分系统</el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu>
-            <el-menu-item @click="goToUsers">Users</el-menu-item>
-            <el-menu-item @click="goToScores">Scores</el-menu-item>
+          <el-menu default-active="1">
+            <el-menu-item @click="goToUsers">用户管理</el-menu-item>
+            <el-menu-item @click="goToScores">成绩管理</el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>
