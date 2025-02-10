@@ -9,6 +9,7 @@ test
 bundle.js
 bundle.js.map
 test.js
+config.env
 
 .cache
 .env
